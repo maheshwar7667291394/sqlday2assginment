@@ -1,0 +1,231 @@
+create table  PROGRAMMER
+(
+empno int(5),
+ProjId varchar(6),
+lastname varchar(30),
+firstname varchar(30),
+hiredate date,
+language varchar(15),
+taskno int(2),
+Privilege varchar(25)
+);
+
+insert into programmer values
+(201,'NPR','gupta','saurav','1993-05-01','VB','52','secret'),
+(390,'KCW','ghosh','pinky','1993-05-01','JAVA',11,'topsecret'),
+(789,'RNC','agarwal','praveen','1998-03-08','VB','11','secret'),
+(134,'TIPPS','chaudhary','supriyo','1995-07-15','C++','52','secret'),
+(896,'KCW','jha','ranjit','1997-06-15','JAVA','10','topsecret'),
+(345,'TIPPS','johan','pitar','1999-11-15','JAVA','52',''),
+(563,'NITTS','Andorson','Andy','1994-08-15','C++','89','confidential');
+
+
+
+3.
+a.
+update programmer set ProjId ='C++'
+where lastname='gupta' and firstname='saurav';
+
+3
+b.
+delete from programmer where lastname='chaudhary' and firstname='supriyo';
+
+C.
+ alter table programmer drop taskno;
+
+4.
+
+create table Department
+(
+deptno int unique,
+dname varchar(15) not null,
+loc varchar(15) not null
+);
+
+6
+
+insert into department values
+(10,'accounts','newyork'),
+(20,'marketing','chikago'),
+(30,'sales','atlanta'),
+(40,'research','ohio');
+
+7
+create table employee
+(
+empno int primary key,
+ename varchar(15) not null,
+job varchar(20) not null,
+sal int not null,
+hiredate date not null,
+deptno int,
+foreign key(deptno)references department(deptno)
+
+);
+
+8.
+
+alter table employee add mgr int(4);
+(
+mgr int(4)
+);
+
+
+9.
+insert into employee values
+(7001,'james','clerk',3000,'2005-05-06',10,1),
+(7002,'mason','president',10000,'2005-06-06',20,2),
+(7003,'clark','manager',5000,'2004-05-06',20,3),
+(7004,'johan','manager',6000,'2005-08-06',10,4),
+(7006,'white','clerka',3500,'2022-08-06',30,5,1,3);
+
+
+10.
+
+create table Grade
+(
+GradeNo int primary key,
+hi_sal int not null,
+lo_sal int not null
+);
+
+11.
+alter table grade drop lo_sal;
+
+12.
+alter table grade add lo_sal int not null;
+
+13.
+insert into grade values
+(1,2000,500),
+(2,3500,2100),
+(3,6000,3600),
+(4,15000,6100);
+
+14.
+create table EMPLOYEE_BACK(select *from employee);
+
+15.
+update employee set sal=3500 where name='james';
+
+16.
+
+17.
+update employee set sal=sal-1000 where deptno=10;
+
+18.
+
+alter table employee add COMM varchar(15);
+
+19.
+update employee set comm=0;
+
+20.
+ 
+after 35.
+
+36.
+select ename from employee order by ename desc;
+
+37.
+select *from employee order by deptno,job desc;
+38.
+select concat( upper(left(ename,1)),substring(ename,2,length(ename))) Ename from employee;
+
+39.
+select lower(ename) from employee;
+
+40.
+select ename, instr(ename,'a') from employee;
+
+41.
+select right(ename,3) from employee;
+
+42.
+
+select ename ,length(ename) length from employee;
+
+43.
+select current_date();
+select current_time();
+
+44.
+select ename,hiredate from employee where datediff
+(current_date(),hiredate)/365>5 ;
+
+45.
+select dayname(last_day(now()));
+
+46.
+select dayname(last_day(hiredate)) from employee;
+
+50.
+select count(ename) totalemp from employee where deptno=10;
+
+51.
+select deptno,count(ename) totalemp from employee group by deptno;
+
+52.
+select job,count(name) from employee group by job;
+
+53.
+
+54.
+select *from employee where sal=(select max(sal) from employee);
+
+55.
+57.
+select deptno, avg(sal) from employee group by deptno;
+58.
+
+60
+select deptno ,count(deptno) from employee group by deptno having count(deptno)>3;
+
+61.
+select job,case
+when job='president' then 1
+when job='clerk' then 2
+else 3
+end
+from employee;
+
+62.
+select job,sum(sal),count(job) from employee group by job having count(*)>=2;
+
+63.
+
+select ename,sal,case
+when sal>=0 then 'can be deducted'
+else 'insuficient fro deduction' 
+end
+from employee ;
+
+
+
+64.
+
+
+select ename from employee
+where deptno=
+(
+select deptno from employee where ename='clark'
+);
+
+66.
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
